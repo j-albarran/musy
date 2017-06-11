@@ -1,0 +1,76 @@
+
+// Header
+options {
+    STATIC = false;
+    IGNORE_CASE = true;
+}
+
+PARSER_BEGIN(Musy)
+
+public class Musy {
+    public static void main(String[] args) throws ParseException {
+        try {
+            Musy parser = new Musy(System.in);
+            parser.start();
+            System.out.println("Syntax correct!");
+        }
+        catch (ParseException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+PARSER_END(Musy)
+
+// Tokens
+SKIP :
+{
+      " "
+    | "\r"
+    | "\t"
+    | "\n"
+}
+
+// Reserved tokens
+TOKEN :
+{
+      <PART : "part">               {System.out.println("PART -> " + image);}
+    | <SONG : "song">               {System.out.println("SONG -> " + image);}
+    | <INSTRUMENT : "instrument">   {System.out.println("INSTRUMENT -> " + image);}
+    | <BEAT : "beat">               {System.out.println("BEAT -> " + image);}
+    | <TITLE : "title">             {System.out.println("TITLE -> " + image);}
+    | <CREATE : "create">           {System.out.println("CREATE -> " + image);}
+    | <PLAY : "play">               {System.out.println("PLAY -> " + image);}
+    | <EXIT : "exit">               {System.out.println("EXIT -> " + image);}
+}
+
+// Delimiter tokens
+TOKEN :
+{
+      <SEMICOLON : ";"> {System.out.println("SEMICOLON -> " + image);}
+    | <COMMA : ",">     {System.out.println("COMMA -> " + image);}
+    | <LPAR : "(">      {System.out.println("LPAR -> " + image);}
+    | <RPAR : ")">      {System.out.println("RPAR -> " + image);}
+    | <LBRAC : "{">     {System.out.println("LBRAC -> " + image);}
+    | <RBRAC : "}">     {System.out.println("RBRAC -> " + image);}
+}
+
+// Operator tokens
+TOKEN :
+{
+      <PLUS : "+">      {System.out.println("PLUS -> " + image);}
+    | <EQUALS : "=">    {System.out.println("EQUALS -> " + image);}
+}
+
+// Identifier tokens
+TOKEN :
+{
+      <ID : (["a"-"z", "A"-"Z"])(["a"-"z", "A"-"Z", "0"-"9"])*> {System.out.println("ID -> " + image);}
+}
+
+// Grammar
+void start() :
+{}
+{
+    (<PART> | <SONG> | <INSTRUMENT> | <BEAT> | <TITLE>) <ID> <EQUALS> (<ID>)+ <EOF>
+}
