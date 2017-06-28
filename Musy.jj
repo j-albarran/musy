@@ -1,5 +1,3 @@
-
-// Header
 options {
     STATIC = false;
     IGNORE_CASE = true;
@@ -7,14 +5,18 @@ options {
 
 PARSER_BEGIN(Musy)
 
-public class Musy {
-    public static void main(String[] args) throws ParseException {
+import jm.JMC;
+import jm.music.data.*;
+import jm.util.*;
+
+public class Musy{
+    public static void main(String[] args) throws ParseException{
         try {
             Musy parser = new Musy(System.in);
             parser.start();
             System.out.println("Syntax correct!");
         }
-        catch (ParseException e) {
+        catch (ParseException e){
             System.out.println(e.getMessage());
         }
     }
@@ -22,55 +24,144 @@ public class Musy {
 
 PARSER_END(Musy)
 
-// Tokens
-SKIP :
+SKIP:
 {
-      " "
+      " "  
     | "\r"
     | "\t"
     | "\n"
 }
 
-// Reserved tokens
-TOKEN :
+TOKEN:
 {
-      <PART : "part">               {System.out.println("PART -> " + image);}
-    | <SONG : "song">               {System.out.println("SONG -> " + image);}
-    | <INSTRUMENT : "instrument">   {System.out.println("INSTRUMENT -> " + image);}
-    | <BEAT : "beat">               {System.out.println("BEAT -> " + image);}
-    | <TITLE : "title">             {System.out.println("TITLE -> " + image);}
-    | <CREATE : "create">           {System.out.println("CREATE -> " + image);}
-    | <PLAY : "play">               {System.out.println("PLAY -> " + image);}
-    | <EXIT : "exit">               {System.out.println("EXIT -> " + image);}
+      <PART : "Part">       {System.out.println("PART -> " + image);}
+    | <NOTE : "Note">       {System.out.println("NOTE -> " + image);}
+    | <QUARTER: "1/4">      {System.out.println("QUARTER -> " + image);}
+    | <HALF: "1/2">         {System.out.println("HALF -> " + image);}
+    | <WHOLE: "1/1">        {System.out.println("WHOLE -> " + image);}
+    | <COMP: "Compose">     {System.out.println("COMP -> " + image);}
+    | <DISP: "Display">     {System.out.println("DISP -> " + image);}
+    | <PLAY: "Play">        {System.out.println("PLAY -> " + image);}
+    | <TO: "To">            {System.out.println("TO -> " + image);}
+    | <COMMA : ",">         {System.out.println("COMMA -> " + image);}
+    | <LPAR : "(">          {System.out.println("LPAR -> " + image);}
+    | <RPAR : ")">          {System.out.println("RPAR -> " + image);}
+    | <LBRAC : "{">         {System.out.println("LBRAC -> " + image);}
+    | <RBRAC : "}">         {System.out.println("RBRAC -> " + image);}
+    
 }
 
-// Delimiter tokens
-TOKEN :
+TOKEN:
 {
-      <SEMICOLON : ";"> {System.out.println("SEMICOLON -> " + image);}
-    | <COMMA : ",">     {System.out.println("COMMA -> " + image);}
-    | <LPAR : "(">      {System.out.println("LPAR -> " + image);}
-    | <RPAR : ")">      {System.out.println("RPAR -> " + image);}
-    | <LBRAC : "{">     {System.out.println("LBRAC -> " + image);}
-    | <RBRAC : "}">     {System.out.println("RBRAC -> " + image);}
+      <PIPE : "|">            {System.out.println("PIPE -> " + image);}
+    | <COLON : ":">           {System.out.println("COLON -> " + image);}
+    | <NUMBER : (["0"-"9"])+> {System.out.println("NUMBER -> " + image);}
 }
 
-// Operator tokens
-TOKEN :
+TOKEN:
 {
-      <PLUS : "+">      {System.out.println("PLUS -> " + image);}
-    | <EQUALS : "=">    {System.out.println("EQUALS -> " + image);}
+      <ADDN : "Add Note">     {System.out.println("ADDN -> " + image);}
+    | <NEWS : "New Song">     {System.out.println("NEWS -> " + image);}
+    | <NEWP : "New Phrase">   {System.out.println("NEWP -> " + image);}
+    | <TEMPO: "Tempo">        {System.out.println("TEMPO -> " + image);}
+    
 }
 
-// Identifier tokens
-TOKEN :
-{
-      <ID : (["a"-"z", "A"-"Z"])(["a"-"z", "A"-"Z", "0"-"9"])*> {System.out.println("ID -> " + image);}
+TOKEN:
+{      
+      <TONE : (["A"-"G"])(["0"-"8"])>    {System.out.println("TONE -> " + image);}
+      |<ID : (["a"-"z", "A"-"Z"])(["a"-"z", "A"-"Z", "0"-"9"])*>  {System.out.println("ID -> " + image);}
 }
 
-// Grammar
-void start() :
+void start():
 {}
 {
-    (<PART> | <SONG> | <INSTRUMENT> | <BEAT> | <TITLE>) <ID> <EQUALS> (<ID>)+ <EOF>
+    (
+        expression()
+    )* 
+} 
+ 
+void expression():
+{}
+{     LOOKAHEAD(3) variableDefinition()
+//    | variableAssignment()
+    | composeSong()
+    | playSong()
+    | createPhrase()
+    | addNotesToPhrase()
+  //  | addNotesToSong()
+    | createSong()
+    | setTempo()
+}
+
+void variableDefinition():
+{}
+{
+    <PART> <ID> <COLON> <ID> (<PIPE> <ID>)*
+    {System.out.println("Variable Defined!\n");}
+}
+
+/*void variableAssignment():
+{}
+{
+    <ID> <COLON> <ID>
+    {System.out.println("Variable Assigned!\n");}
+}*/
+
+
+
+void composeSong():
+{}
+{
+    <COMP> <COLON> <ID>
+    {Intermediate.exportMidi();
+     System.out.println("Song has been written in a file!");}
+}
+
+void playSong():
+{}
+{
+    <PLAY> <COLON> <ID>
+    {Intermediate.playSong();
+     System.out.println("Song will now be played!");}
+}
+
+/*void displayDetails():
+{}
+{   
+    <DISP> <COLON> <ID>
+    {System.out.println("Details of the Song are being displayed!");}
+}*/
+
+void addNotesToPhrase():
+{Token a, b, c;}
+{
+    <ADDN> a=<TONE> (b=<QUARTER> | b=<HALF> | b=<WHOLE>) <TO> c=<ID>
+    {new Intermediate();
+     Intermediate.createNote(a.image, b.image , c.image);
+     System.out.println("Note added to \"" + c.image + "\" !");}
+}
+
+void createPhrase():
+{Token a;}
+{
+    <NEWP> <COLON> a=<ID>
+    {Intermediate.createPhrase(a.image);
+     System.out.println("Phrase \"" + a.image + "\" Created!");}
+}
+
+void createSong():
+{Token a;}
+{
+    <NEWS> <COLON> a=<ID>
+    {Intermediate.createSong(a.image);
+     System.out.println("Song \"" + a.image + "\" Created!");}
+}
+
+void setTempo():
+{Token a;}
+{
+    <TEMPO> <COLON> a=<NUMBER>
+    {Intermediate.setTempo(a.image);
+     System.out.println("Tempo set to " + a.image + " !");}
 }

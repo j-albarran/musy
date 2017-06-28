@@ -11,21 +11,21 @@ public interface MusyConstants {
   /** RegularExpression Id. */
   int PART = 5;
   /** RegularExpression Id. */
-  int SONG = 6;
+  int NOTE = 6;
   /** RegularExpression Id. */
-  int INSTRUMENT = 7;
+  int QUARTER = 7;
   /** RegularExpression Id. */
-  int BEAT = 8;
+  int HALF = 8;
   /** RegularExpression Id. */
-  int TITLE = 9;
+  int WHOLE = 9;
   /** RegularExpression Id. */
-  int CREATE = 10;
+  int COMP = 10;
   /** RegularExpression Id. */
-  int PLAY = 11;
+  int DISP = 11;
   /** RegularExpression Id. */
-  int EXIT = 12;
+  int PLAY = 12;
   /** RegularExpression Id. */
-  int SEMICOLON = 13;
+  int TO = 13;
   /** RegularExpression Id. */
   int COMMA = 14;
   /** RegularExpression Id. */
@@ -37,11 +37,23 @@ public interface MusyConstants {
   /** RegularExpression Id. */
   int RBRAC = 18;
   /** RegularExpression Id. */
-  int PLUS = 19;
+  int PIPE = 19;
   /** RegularExpression Id. */
-  int EQUALS = 20;
+  int COLON = 20;
   /** RegularExpression Id. */
-  int ID = 21;
+  int NUMBER = 21;
+  /** RegularExpression Id. */
+  int ADDN = 22;
+  /** RegularExpression Id. */
+  int NEWS = 23;
+  /** RegularExpression Id. */
+  int NEWP = 24;
+  /** RegularExpression Id. */
+  int TEMPO = 25;
+  /** RegularExpression Id. */
+  int TONE = 26;
+  /** RegularExpression Id. */
+  int ID = 27;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -53,22 +65,28 @@ public interface MusyConstants {
     "\"\\r\"",
     "\"\\t\"",
     "\"\\n\"",
-    "\"part\"",
-    "\"song\"",
-    "\"instrument\"",
-    "\"beat\"",
-    "\"title\"",
-    "\"create\"",
-    "\"play\"",
-    "\"exit\"",
-    "\";\"",
+    "\"Part\"",
+    "\"Note\"",
+    "\"1/4\"",
+    "\"1/2\"",
+    "\"1/1\"",
+    "\"Compose\"",
+    "\"Display\"",
+    "\"Play\"",
+    "\"To\"",
     "\",\"",
     "\"(\"",
     "\")\"",
     "\"{\"",
     "\"}\"",
-    "\"+\"",
-    "\"=\"",
+    "\"|\"",
+    "\":\"",
+    "<NUMBER>",
+    "\"Add Note\"",
+    "\"New Song\"",
+    "\"New Phrase\"",
+    "\"Tempo\"",
+    "<TONE>",
     "<ID>",
   };
 
