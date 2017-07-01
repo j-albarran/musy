@@ -154,7 +154,7 @@ void addNotesToPhrase() throws ParseException {Token a, b, c;
     c = jj_consume_token(ID);
 new Intermediate();
      Intermediate.createNote(a.image, b.image , c.image);
-     System.out.println("Note added to \u005c"" + c.image + "\u005c" !");
+     System.out.println("Note added to \u005c" + c.image + "\u005c !");
   }
 
   final public void createPhrase() throws ParseException {Token a;
@@ -162,7 +162,7 @@ new Intermediate();
     jj_consume_token(COLON);
     a = jj_consume_token(ID);
 Intermediate.createPhrase(a.image);
-     System.out.println("Phrase \u005c"" + a.image + "\u005c" Created!");
+     System.out.println("Phrase \u005c" + a.image + "\u005c Created!");
   }
 
   final public void createSong() throws ParseException {Token a;
@@ -170,7 +170,7 @@ Intermediate.createPhrase(a.image);
     jj_consume_token(COLON);
     a = jj_consume_token(ID);
 Intermediate.createSong(a.image);
-     System.out.println("Song \u005c"" + a.image + "\u005c" Created!");
+     System.out.println("Song \u005c" + a.image + "\u005c Created!");
   }
 
   final public void setTempo() throws ParseException {Token a;
