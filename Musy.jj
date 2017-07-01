@@ -130,7 +130,8 @@ void playSong():
 {}
 {   
     <DISP> <COLON> <ID>
-    {System.out.println("Details of the Song are being displayed!");}
+    {System.out.println("Details of the Song are being displayed!");
+    Intermediate.displaySong()}
 }*/
 
 void addNotesToPhrase():
