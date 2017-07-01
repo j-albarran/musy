@@ -6,6 +6,7 @@ import jm.music.data.Score;
 import jm.util.Play;
 import jm.util.Write;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 
@@ -15,14 +16,14 @@ public class Song  {
     private Score song;
     private Part part = new Part("whole song");
 
-    Song(String title)
+    public Song(String title)
     {
         size = 0;
         this.song = new Score(title);
         song.addPart(part);
     }
 
-    Song()
+    public Song()
     {
         size = 0;
         song = new Score();
@@ -81,6 +82,21 @@ public class Song  {
         Write.midi(song, this.getTitle());
     }
 
+    public void display()
+    {
+        System.out.print(this.song.getTitle()+":");
+        Part part = song.getPart("whole song");
 
+        for(int i = 0; i < part.getPhraseList().size(); i++)
+        {
+            System.out.print("\t"+part.getPhrase(i).getTitle()+":");
+            for(int j = 0; j < part.getPhrase(i).size(); j++)
+            {
+                System.out.print("\t"+part.getPhrase(i).getNote(j).toString());
+            }
+
+            System.out.println();
+        }
+    }
 
 }
