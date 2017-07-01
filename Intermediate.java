@@ -299,7 +299,7 @@ public class Intermediate {
         songs.peek().addPhrase(new Phrase(title));
     }
 
-    public static void displayNotes()
+    public static void displaySong()
     {
         songs.peek().display();
     }
