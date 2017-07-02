@@ -34,8 +34,8 @@ SKIP:
 
 TOKEN:
 {
-      <PART : "Part">       {System.out.println("PART -> " + image);}
-    | <NOTE : "Note">       {System.out.println("NOTE -> " + image);}
+      <NOTE : "Note">       {System.out.println("NOTE -> " + image);}
+    | <EIGHT: "1/8">        {System.out.println("EIGHT -> " + image);}
     | <QUARTER: "1/4">      {System.out.println("QUARTER -> " + image);}
     | <HALF: "1/2">         {System.out.println("HALF -> " + image);}
     | <WHOLE: "1/1">        {System.out.println("WHOLE -> " + image);}
@@ -83,23 +83,21 @@ void start():
  
 void expression():
 {}
-{     LOOKAHEAD(3) variableDefinition()
-//    | variableAssignment()
-    | composeSong()
+{     composeSong()
     | playSong()
     | createPhrase()
     | addNotesToPhrase()
-  //  | addNotesToSong()
     | createSong()
     | setTempo()
+    | <EOF>
 }
 
-void variableDefinition():
+/*void variableDefinition():
 {}
 {
     <PART> <ID> <COLON> <ID> (<PIPE> <ID>)*
     {System.out.println("Variable Defined!\n");}
-}
+}*/
 
 /*void variableAssignment():
 {}
@@ -130,14 +128,13 @@ void playSong():
 {}
 {   
     <DISP> <COLON> <ID>
-    {System.out.println("Details of the Song are being displayed!");
-    Intermediate.displaySong()}
+    {System.out.println("Details of the Song are being displayed!");}
 }*/
 
 void addNotesToPhrase():
 {Token a, b, c;}
 {
-    <ADDN> a=<TONE> (b=<QUARTER> | b=<HALF> | b=<WHOLE>) <TO> c=<ID>
+    <ADDN> a=<TONE> (b=<EIGHT> | b=<QUARTER> | b=<HALF> | b=<WHOLE>) <TO> c=<ID>
     {new Intermediate();
      Intermediate.createNote(a.image, b.image , c.image);
      System.out.println("Note added to \"" + c.image + "\" !");}

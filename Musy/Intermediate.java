@@ -255,8 +255,6 @@ public class Intermediate {
                 break;
             case "1/4": note = new Note(value, JMC.QUARTER_NOTE);
                 break;
-            case "1/8": note = new Note(value, JMC.EIGHTH_NOTE);
-                        break;
             default: note = new Note(value, JMC.WHOLE_NOTE);
                     break;
         }
@@ -299,11 +297,6 @@ public class Intermediate {
     {   
         System.out.println(title);
         songs.peek().addPhrase(new Phrase(title));
-    }
-
-    public static void displaySong()
-    {
-        songs.peek().display();
     }
 
 
