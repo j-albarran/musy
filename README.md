@@ -22,21 +22,18 @@ Define beat of the song
 Prints a visual representation of the selected song’s stave
 Example of a Program
 
-    C:\Users\Admin> java Musy
-
-    Musy >> Part p1 = C4 W D4 Q D4 Q G4 H
-    Musy >> Part p2 = D4 Q D4 Q D4 Q D4 Q
-    Musy >> Song Twinkle= Part1 Part1 Part2 Part1 Part2
-    Musy >> Instrument = Acoustic_Guitar
-    Musy >> Beat = 120
-    Musy >> Title = Twinkle Twinkle
-    Musy >> Create Twinkle Twinkle
-
-    --- Song "Twinkle Twinkle" was created successfully ---
-
-    Musy >> Play Twinkle Twinkle
-
-    --- Song plays ---
+    New Song : mySong
+    New Phrase : part1
+    Add Note A4 1/2 To part1
+    Add Note B6 1/1 To part1
+    Add Note C3 1/4 To part1
+    New Phrase : part2
+    Add Note E7 1/4 To part2
+    Add Note F2 1/4 To part2
+    Add Note A5 1/4 To part2
+    Tempo : 300
+    Play : mySong
+    Compose : mySong
 
 
 
