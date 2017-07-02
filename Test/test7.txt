@@ -1,0 +1,12 @@
+New Song : noMeImporta
+New Phrase : part1
+Add Note A4 1/2 To part1
+Add Note B6 1/1 To part1
+Add Note C3 1/4 To part1
+New Phrase : part2
+Add Note E7 1/4 To part2
+Add Note F2 1/4 To part2
+Add Note A5 1/4 To part2
+Tempo : 300
+Play : noMeImporta
+Compose : noMeImporta
