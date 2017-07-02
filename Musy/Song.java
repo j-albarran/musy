@@ -1,5 +1,3 @@
-package Musy;
-
 import jm.JMC;
 import jm.music.data.Note;
 import jm.music.data.Part;
