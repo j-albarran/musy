@@ -1,3 +1,5 @@
+package Musy;
+
 import jm.JMC;
 import jm.music.data.Note;
 import jm.music.data.Phrase;
@@ -255,6 +257,8 @@ public class Intermediate {
                 break;
             case "1/4": note = new Note(value, JMC.QUARTER_NOTE);
                 break;
+            case "1/8": note = new Note(value, JMC.EIGHTH_NOTE);
+                        break;
             default: note = new Note(value, JMC.WHOLE_NOTE);
                     break;
         }
