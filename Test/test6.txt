@@ -1,0 +1,7 @@
+New Song : myFirstSong
+New Phrase : part1
+Add Note A4 1/2 To part1
+Add Note B6 1/1 To part1
+Tempo : 120
+Play : myFirstSong
+Compose : myFirstSong
