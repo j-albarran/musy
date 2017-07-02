@@ -1,4 +1,0 @@
-Part Pow = Jo
-Note hey = mama
-Part Coco = Jo + Ja
-Note ho = yo + yi
